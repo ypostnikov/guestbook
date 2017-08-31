@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/si.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE guestbook SYSTEM "si.dtd">
+
+    <guestbook>
+    ...
+    </guestbook>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT guestbook (message)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT message (origin|answer)*>
+<!ATTLIST message
+    idmessage CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT origin (name|origintext)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT name (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT origintext (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT answer (name|origintext)*>
+<!ATTLIST answer
+    idanswer CDATA #IMPLIED
+  >
