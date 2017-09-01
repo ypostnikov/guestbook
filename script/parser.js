@@ -16,7 +16,8 @@ if (typeof XMLP === 'undefined') {
         },
         iSdecrement: function () {
             return (this.iScount() - 2);
-        }
+        },
+        DOMN:{}
     };
     
     function Assembler(){;}
@@ -254,10 +255,10 @@ function loadXML(xml) {
             var currentCell = this.parentNode; 
              editRowElement = this.parentNode.parentElement;
              editTdCell = editRowElement.cells[2]; 
+             XMLP.DOMN.oldFrag = editTdCell.childNodes.item(1);
              editRowElement.cells[5].setAttribute('id','tdHidden'); 
              editTdCell.setAttribute('id','activeCellEdit'); 
              editTdCell.addEventListener('click',clickArea);
-            
           
             function clickArea(e){
                 if(e.type == "click" && iCount >=1){
@@ -296,7 +297,14 @@ Assembler.sendEditMessage = function (e){
         sendItem.message.origin.origintext = editedValue;
         sendItem.message.idmessage =idEditedMessage;
         jsonText =JSON.stringify(sendItem);
-
+        
+        editedRoot.removeChild( editedRoot.childNodes.item(0));
+        var inner = document.createElement('div');
+        inner.setAttribute('class','divanswer');
+        inner.innerHTML = editedValue ;
+        editedRoot.appendChild(inner);
+        editedRoot.appendChild( XMLP.DOMN.oldFrag);
+       
         $.ajax({
         type:"POST",
         url:"app/handlerRequest.php",
